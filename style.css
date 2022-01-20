@@ -1,0 +1,19 @@
+*,*::before,*::after{
+    box-sizing:border-box;
+    margin:0;
+}
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+ 
+    justify-content:center;
+    align-items:center;
+}
+#canvas{
+    max-width:550px;
+    min-height:500px;
+    width:100%;
+    border:1px solid grey;
+   
+}
