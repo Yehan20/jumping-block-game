@@ -1,20 +1,49 @@
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 body{
     min-height:100vh;
     background-color:#333;
-    width:100vw;
-    position:fixed;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
-    margin:0;
+    overflow: hidden;
+    font-family:sans-serif;
+}
+.container{
+    margin:1em auto;
+    max-width:min-content;
+    padding:1em;
+    width:90%;
+   
+   
+
+}
+
+.title{
+    text-align:center;
+    color:#fff;
+    font-size:2rem;
+    margin-bottom:1em;
+}
+.stats{
+    font-size:1rem;
+    display:flex;
+    color:#fff;
+    justify-content:space-evenly;
+    gap:10px;
+    margin-bottom:1em;
 }
 #canvas{
     border-radius:5px;
     background-color:wheat;
+    max-width:550px;
+    min-height:300px;
+    padding:1em;
+    
+
 }
 #overlay{
     position:absolute;

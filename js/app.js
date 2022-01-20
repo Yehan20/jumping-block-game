@@ -2,13 +2,17 @@
 
 const canvas = document.getElementById('canvas');
 const ctx= canvas.getContext('2d')
+let jumpLevelr= document.querySelector('.jump__level span')
+let scoreBar = document.querySelector('.points span')
+jumpLevelr.textContent=13;
+
+
+canvas.width=600;
+canvas.height=550;
+
 
 //declaring html variables
-const card = document.getElementById('card');
-const cardScore  =document.getElementById('card-score');
-const btn = document.querySelector('button');
 
-const textScore=document.querySelector('.text-score');
 
 
 //intervbal for obstacles
@@ -36,26 +40,13 @@ function restart(button){
     startGame();
     requestAnimationFrame(animate);
     console.log('btn  clicked');
-    cardScore.textContent='';
+    
 }
 
 
 let obstacles=[]; // empty array to store the objects
 // animate to update each time , 
 
-
-//functiin start game()
-
-//draw score function
-function drawScore(){
-     ctx.font = '80px arial';
-     ctx.fillStyle='black';
-     let scoreString = score.toString();
-     let xOffest = ((scoreString.length -1)*20);
-     ctx.fillText(scoreString,280 - xOffest,190)
-     textScore.textContent=scoreString;
-
-}
 
 
 
@@ -76,7 +67,6 @@ function animate(){
   animationId= requestAnimationFrame(animate);
    ctx.clearRect(0,0,canvas.width,canvas.height);
    drawBackgroundLine();
-   drawScore();
    box.draw();
    increaseEnemySpeed();
    obstacles.forEach((obstacle,index)=>{
@@ -84,13 +74,12 @@ function animate(){
         if(collide(box,obstacle)){ // its true
              cancelAnimationFrame(animationId)
              console.log('collide');
-             card.style.display='block';
-             cardScore.textContent='';
-             textScore.textContent=''
+
         }
         if(isPastBlock(box,obstacle) && canScore){
             canScore=false;
             score ++;
+            scoreBar.textContent=score;
         }
        //Delete Block That has left the scrreen
        if((obstacle.x + obstacle.size)<=0){
@@ -209,4 +198,18 @@ addEventListener('keydown',e=>{
               canScore=true;
           }
       }
+})
+
+addEventListener('keyup',(e)=>{
+    if(e.code==='ArrowUp'){
+        if(!box.increase){
+            box.jumpHeight++;
+            jumpLevelr.textContent=box.jumpHeight++;
+            if(box.jumpHeight>=18){
+                box.jumpHeight=12;
+                
+                
+            }
+        }
+    }
 })

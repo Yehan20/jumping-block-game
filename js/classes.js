@@ -4,19 +4,17 @@ class Box{
         this.y=y;
         this.size=size; 
         this.color=color;
-        this.jumpHeight=12,
+        this.jumpHeight=12;
  
         // this 3 are used for jump configuarations
-        this.shouldJump= false,
+        this.shouldJump= false;
         this.jumpCounter=0
-        this.spin=0;
-        this.spinIncrement=90/32; // rotate in one jump
         this.ctx=ctx;
+        this.souldIncrease=false;
  
     }
  
- 
-     //jumpMethod
+
      jump(){
          if(this.shouldJump){
              this.jumpCounter++;
@@ -77,7 +75,7 @@ class Box{
     draw(){
         let ctx=this.ctx;
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x,this.y,this.size,this.size); // where shoud they come from in this canvas
+        ctx.fillRect(this.x,this.y,this.size,this.size*2); // where shoud they come from in this canvas
     }
     slide(){
         this.draw();
