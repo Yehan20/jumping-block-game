@@ -20,14 +20,15 @@ function drawRoad(){
     ctx.stroke();
 }
 
-const circle = new Circle(20,'red',canvas,ctx);
-
+const circle = new Circle(16,'red',canvas,ctx);
+const obstacle = new Obstacles(canvas,ctx,50,2);
 
 
 function animate(){
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,canvas.width,canvas.height);
     circle.drawCircle();
+    obstacle.slide()
     drawRoad();
     
 }
@@ -35,9 +36,7 @@ animate();
 
 console.log(circle);
 
-document.getElementById('jump').addEventListener('click',(e)=>{
 
-})
 
 let a=0;
 addEventListener('keydown',(e)=>{

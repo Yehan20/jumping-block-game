@@ -1,8 +1,8 @@
 //contains classes of the objects
 class Circle{
     constructor(size,color,canvas,ctx){
-       this.posY=(canvas.height)-47; // 503
-       this.posX=canvas.width/2;
+       this.posY=(canvas.height)-43; // 503
+       this.posX=canvas.width/2.5;
        this.radius=size;
        this.color=color;
        this.ctx=ctx;
@@ -54,4 +54,24 @@ class Circle{
             }
         }
     }
+}
+
+//class Obstatcles
+class Obstacles{
+     constructor(canvas,ctx,size,speed){
+         this.posX= 350;
+         this.posY=(canvas.height-28)-size;
+         this.size=size;
+         this.speed=speed
+         this.ctx=ctx;
+     }
+     drawObstacle(){
+        let ctx= this.ctx;
+        ctx.fillStyle='blue';
+        ctx.fillRect(this.posX,this.posY,this.size/2,this.size)
+     }
+     slide(){
+         this.drawObstacle();
+         this.posX-=this.speed;
+     }
 }
