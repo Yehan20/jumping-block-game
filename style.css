@@ -1,19 +1,68 @@
-*,*::before,*::after{
+*{
     box-sizing:border-box;
-    margin:0;
 }
 body{
+    min-height:100vh;
+    background-color:#333;
+    width:100vw;
+    position:fixed;
     display:flex;
     flex-direction:column;
-    min-height:100vh;
- 
     justify-content:center;
     align-items:center;
+    margin:0;
 }
 #canvas{
-    max-width:550px;
-    min-height:500px;
+    border-radius:5px;
+    background-color:wheat;
+}
+#overlay{
+    position:absolute;
+    top:0;
+    left:0;
     width:100%;
-    border:1px solid grey;
-   
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:black;
+}
+#overlay #card{
+    background-color:wheat;
+    width:500px;
+    min-height:150px;
+    border-radius:5px;
+    animation: cardIn 1s forwards;
+    display:none;
+    padding:1em;
+}
+
+#card>p{
+   font-size:50px;
+   margin-top:10px;
+   user-select:none;
+}
+
+button{
+    outline:none;
+    color:#fff;
+    border:none;
+    background:blue;
+    padding:10px;
+    width:90%;
+    border-radius:20px;
+    font-size:20px;
+    cursor: pointer;
+}
+
+@keyframes cardIn{
+    0%{
+        opacity:0;
+        transform:translateY(-50px);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0px);
+    }
 }

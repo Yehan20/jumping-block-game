@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Bounce Game</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h3>Bounce game</h3>
-    <canvas  id="canvas">
-
+    <section id="overlay">
+        <div id="card">
+            <p>Yo srcoe <span id="card-score">0</span></p>
+            <button onclick="restart(this)">Restart</button>
+        </div>
+        <h2 class="text-score">
+            
+        </h2>
+    </section>
+    <h1>Jumpp</h1>
+    <canvas width="600" height="600" id="canvas">
+      
     </canvas>
     <script src='js/classes.js'></script>
     <script src='js/app.js'></script>
-  
 </body>
 </html>

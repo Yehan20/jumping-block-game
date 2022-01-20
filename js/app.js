@@ -1,77 +1,212 @@
-// contains all the calling of objects and ui methods
-
-// 1st task to create the class that is responsible for the player
+//declaring variables
 
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const btn = document.querySelector('jump');
+const ctx= canvas.getContext('2d')
 
-canvas.width=550;
-canvas.height= 500;
-console.log(canvas.width);
+//declaring html variables
+const card = document.getElementById('card');
+const cardScore  =document.getElementById('card-score');
+const btn = document.querySelector('button');
 
-function drawRoad(){
-    ctx.beginPath();
-    ctx.moveTo(0,canvas.height-20);
-    ctx.lineTo(canvas.width,canvas.height-20)
-    ctx.lineWidth=15;
-    ctx.lineCap='round'
-    ctx.Strokestyle='#ccc';
-    ctx.stroke();
+const textScore=document.querySelector('.text-score');
+
+
+//intervbal for obstacles
+let presentTime = 1000;
+let enemySpeed=5;
+let animationId=null;
+// sound effects
+let score = 0;
+let increment = 0;
+let canScore = true;
+
+// now we create the horizontal line
+function drawBackgroundLine(){
+   ctx.beginPath();
+   ctx.moveTo(0,400);
+   ctx.lineTo(600,400);
+   ctx.lineWidth=1.9;
+   ctx.strokeStyle='black';
+   ctx.stroke();
 }
 
-const circle = new Circle(16,'red',canvas,ctx);
-const obstacle = new Obstacles(canvas,ctx,50,2);
+function restart(button){
+    card.style.display='none';
+    button.blur();
+    startGame();
+    requestAnimationFrame(animate);
+    console.log('btn  clicked');
+    cardScore.textContent='';
+}
+
+
+let obstacles=[]; // empty array to store the objects
+// animate to update each time , 
+
+
+//functiin start game()
+
+//draw score function
+function drawScore(){
+     ctx.font = '80px arial';
+     ctx.fillStyle='black';
+     let scoreString = score.toString();
+     let xOffest = ((scoreString.length -1)*20);
+     ctx.fillText(scoreString,280 - xOffest,190)
+     textScore.textContent=scoreString;
+
+}
+
+
+
+let box = new Box(ctx,150,350,50,'black');
+animate();
+function startGame(){
+   box= new Box(ctx,150,350,50,'black');
+   obstacles=[];
+   increment=0;
+   enemySpeed=5;
+   canScore=true;
+   presentTime = 1000
+   
+}
 
 
 function animate(){
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    circle.drawCircle();
-    obstacle.slide()
-    drawRoad();
-    
+  animationId= requestAnimationFrame(animate);
+   ctx.clearRect(0,0,canvas.width,canvas.height);
+   drawBackgroundLine();
+   drawScore();
+   box.draw();
+   increaseEnemySpeed();
+   obstacles.forEach((obstacle,index)=>{
+       obstacle.slide(); // this are objects qand then we can acces this slide method eachj time
+        if(collide(box,obstacle)){ // its true
+             cancelAnimationFrame(animationId)
+             console.log('collide');
+             card.style.display='block';
+             cardScore.textContent='';
+             textScore.textContent=''
+        }
+        if(isPastBlock(box,obstacle) && canScore){
+            canScore=false;
+            score ++;
+        }
+       //Delete Block That has left the scrreen
+       if((obstacle.x + obstacle.size)<=0){
+              setTimeout(()=>{
+                   obstacles.splice(index,1);
+              },0)
+       }
+   })
 }
-animate();
-
-console.log(circle);
 
 
+function getRandom(min,max){
+   return Math.floor(Math.random() * (max- min + 1) + min);
+}
 
-let a=0;
-addEventListener('keydown',(e)=>{
-    
-    
-      if(e.code==='Space'){
+// random interval
+
+function randomNumberGap(timeInterval){
+   let returnTime = timeInterval;
+   if(Math.random()<0.5){
+       returnTime += getRandom(presentTime / 3 , presentTime * 1.5);
+
       
-        
-         console.log(a);
-        if(!circle.canJump){
-            circle.canJump=true;
-            circle.jumpIncrement=0;
-            
-            circle.maxLimit=0;
-           
-          
-        }
+   }
+   else{
+       returnTime -= getRandom(presentTime / 3 , presentTime /2);
+   }
+   return  returnTime;
+}
+
+
+function increaseEnemySpeed(){
+   if(increment + 10 === score){
+       increment=score;
+       enemySpeed++
+       
+       presentTime>=100? presentTime-=100:presentTime=presentTime/2 // make the blooks appear quickly
+
+       //update exsiting blocks
+       obstacles.forEach(arrayBlocks=>{
+           arrayBlocks.slideSpeed= enemySpeed;
+       })
+   }
+}
+
+
+//auto generate blocks
+function generateBlocks(){ // this generates some time for the blocks to appear
+
+    let timeDelay  = randomNumberGap(presentTime); // 1000 secnds get a different range of times
+
+    //pushing the object to the array 
+    obstacles.push(new Block(canvas,50,enemySpeed)) // 
+     
+    // each time some blocks get geneated
+    setTimeout(generateBlocks,timeDelay); // this method will be called after the random ranges of times
+}
+
+
+
+function collide(player,block){
+
+   //get exact copy of class objects
+   let s1 = Object.assign(Object.create(Object.getPrototypeOf(player)),player);
+   
+   console.log(s1);
+  
+
+   let s2 = Object.assign(Object.create(Object.getPrototypeOf(block)),block);
+   console.log(s2);
+
+   //Dont need pixel Perfect collision detection
+
+   s2.size = s2.size -10;
+   s2.x = s2.x + 10;
+
+   s2.y = s2.y + 10;
+
+   
+   return !(
+       s1.x>s2.x + s2.size ||
+       s1.x + s1.size < s2.x ||
+       s1.y > s2.y + s2.size||
+       s1.y + s1.size < s2.y
+   )
+
+   
+}
+
+
+// makking a class to add the circle
+
+
+//if the player passes the block
+function isPastBlock(player,block){
+    return (
+        player.x + (player.size/2) > block.x + (block.size/4) &&
+        player.x + (player.size/2) < block.x + (block.size/4) *3
+
+    )
+}
+
+
+
+setTimeout(()=>{
+    generateBlocks();
+
+},randomNumberGap(presentTime)) // in different times call this
+
+
+addEventListener('keydown',e=>{
+      if(e.code==='Space'){
+          if(!box.shouldJump){
+              box.jumpCounter=0;
+              box.shouldJump=true;
+              canScore=true;
+          }
       }
-
-    
-
-
 })
-
-addEventListener('keyup',(e)=>{
-    if(e.code==='ArrowUp'){
-        console.log(
-            'ddd'
-        );
-        circle.maxHeight++;
-        if(circle.maxHeight>20){
-            circle.maxHeight=8
-        }
-    }
-    
-    console.log(e.code);
-})
-
