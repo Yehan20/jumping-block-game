@@ -8,17 +8,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- <section id="overlay">
-        <div id="card">
-            <p>Yo srcoe <span id="card-score">0</span></p>
-            <button onclick="restart(this)">Restart</button>
-        </div>
-        <h2 class="text-score">
 
-        </h2>
-    </section> -->
     <div class="container">
-        <h1 class="title">Press Space to Jump and Arrow Up to increase Velocity</h1>
+        <h1 class="title">Press Space to Jump </h1>
         <div class="stats">
             <h3 class="jump__level">Jump Speed:<span> </span></h3>
             <h3 class="points">Point: <span> </span></h3>
@@ -28,6 +20,10 @@
         <canvas  id="canvas">
       
         </canvas>
+    </div>
+    <div class="game__over">
+        <p class="final__score">Your Score is 0</p>
+        <button id="restart" class="btn">Restart</button>
     </div>
     
     <script src='js/classes.js'></script>

@@ -2,11 +2,13 @@
 
 const canvas = document.getElementById('canvas');
 const ctx= canvas.getContext('2d')
+const gameOver = document.querySelector('.game__over')
 let jumpLevelr= document.querySelector('.jump__level span')
 let scoreBar = document.querySelector('.points span')
 let level = document.querySelector('.level span')
 
-jumpLevelr.textContent=13;
+jumpLevelr.textContent=' Medium';
+scoreBar.textContent=' 0'
 level.textContent=1;
 
 canvas.width=600;
@@ -30,9 +32,9 @@ let canScore = true;
 function drawBackgroundLine(){
    ctx.beginPath();
    ctx.moveTo(0,400);
-   ctx.lineTo(600,400);
-   ctx.lineWidth=1.9;
-   ctx.strokeStyle='black';
+   ctx.lineTo(canvas.width,400);
+   ctx.lineWidth=2;
+   ctx.strokeStyle='#222';
    ctx.stroke();
 }
 
@@ -52,10 +54,10 @@ let obstacles=[]; // empty array to store the objects
 
 
 
-let box = new Box(ctx,150,350,50,'black');
+let box = new Box(ctx,150,350,50,'blue');
 animate();
 function startGame(){
-   box= new Box(ctx,150,350,50,'black');
+   box= new Box(ctx,150,350,50,'blue');
    obstacles=[];
    increment=0;
    enemySpeed=5;
@@ -76,6 +78,7 @@ function animate(){
         if(collide(box,obstacle)){ // its true
              cancelAnimationFrame(animationId)
              console.log('collide');
+             gameOver.style.display='flex';
 
         }
         if(isPastBlock(box,obstacle) && canScore){
@@ -84,6 +87,16 @@ function animate(){
             scoreBar.textContent=score;
             if(score===10){
                level.textContent=2;
+               if(!box.increase){
+               
+               
+                jumpLevelr.textContent='High';
+                // if(box.jumpHeight>=18){
+                //     box.jumpHeight=12;
+                    
+                    
+                // }
+             }
             }
         }
        //Delete Block That has left the scrreen
@@ -135,7 +148,7 @@ function increaseEnemySpeed(){
 function generateBlocks(){ // this generates some time for the blocks to appear
 
     let timeDelay  = randomNumberGap(presentTime); // 1000 secnds get a different range of times
-    let randomSize=getSize();
+    let randomSize=getSize();// get the random object
     //pushing the object to the array 
     obstacles.push(new Block(canvas,50,enemySpeed,randomSize.startY,randomSize.double)) // 
      
@@ -165,7 +178,8 @@ function getSize(){
         type.double=1;
         return type;
     }
-    
+    //returns an object 
+
 }
 
 function collide(player,block){
@@ -232,7 +246,7 @@ addEventListener('keyup',(e)=>{
     if(e.code==='ArrowUp'){
         if(!box.increase){
             box.jumpHeight=19;
-            jumpLevelr.textContent=box.jumpHeight;
+            jumpLevelr.textContent='High';
             // if(box.jumpHeight>=18){
             //     box.jumpHeight=12;
                 
@@ -246,7 +260,7 @@ addEventListener('keyup',(e)=>{
     if(e.code==='ArrowDown'){
         if(!box.increase){
             box.jumpHeight=12;
-            jumpLevelr.textContent=box.jumpHeight;
+            jumpLevelr.textContent='Low';
   
         }
     }

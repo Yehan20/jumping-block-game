@@ -5,16 +5,19 @@
 }
 body{
     min-height:100vh;
-    background-color:#333;
+    background-color:burlywood;
     display:flex;
     flex-direction:column;
-    align-items:center;
+    /* align-items:center; */
     overflow: hidden;
     font-family:sans-serif;
+    background-image:url('https://wallpapersprinted.com/download/2/3d_cubes_black-wallpaper-2560x1600.jpg');
+    background-size:cover;
+    background-blend-mode:multiply;
 }
 .container{
     margin:1em auto;
-    max-width:min-content;
+    max-width:1200px;;
     padding:1em;
     width:90%;
    
@@ -26,72 +29,85 @@ body{
     text-align:center;
     color:#fff;
     font-size:2rem;
-    margin-bottom:1em;
+    margin-bottom:0.5em;
 }
 .stats{
     font-size:1rem;
     display:flex;
     color:#fff;
-    justify-content:space-evenly;
-    gap:10px;
+    justify-content:center;
+    gap:30px;
     margin-bottom:1em;
+    flex-wrap:wrap;
+    align-items:center;
+    
 }
 #canvas{
     border-radius:5px;
     background-color:wheat;
-    max-width:550px;
-    min-height:300px;
+    max-width:600px;
+   
     padding:1em;
-    
+    box-shadow: 0 0  3px 5px brown;
+    /* width:100%; */
+    width: 100%;
+    margin-left:25%;
+    margin-right:25%;
+    /* opacity:0.3; */
+ 
 
 }
-#overlay{
+
+.game__over{
     position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:black;
-}
-#overlay #card{
-    background-color:wheat;
-    width:500px;
-    min-height:150px;
-    border-radius:5px;
-    animation: cardIn 1s forwards;
-    display:none;
+    top:30%;
+    left:50%;
+    transform:translate(-50%,50%);
+    background:#ccc;
     padding:1em;
-}
-
-#card>p{
-   font-size:50px;
-   margin-top:10px;
-   user-select:none;
-}
-
-button{
-    outline:none;
-    color:#fff;
-    border:none;
-    background:blue;
-    padding:10px;
+    max-width:400px;
     width:90%;
-    border-radius:20px;
-    font-size:20px;
-    cursor: pointer;
+    display:flex;
+    flex-direction:column;
+    border-radius:0.2em;
+    outline:2px solid #222;
+    display:none;
+    animation: move 500ms ease-in;
+}
+.final__score{
+    font-size:clamp(1rem,2.5vw,2rem);
+    text-align:center;
+    margin-bottom:1em;
+}
+.btn{
+    display:inline-block;
+    padding:0.5em;
+    border:0;
+    outline:0;
+    background:#01ef;
+    font-size:1.5rem;
+    font-size:clamp(1rem,2.5vw,1.5rem);
+    border-radius:0.2em;
+   align-self: center;
+   cursor: pointer;
+   color:#fff;
+
 }
 
-@keyframes cardIn{
-    0%{
-        opacity:0;
-        transform:translateY(-50px);
+@media (max-width:1000px){
+    #canvas{
+        margin:0;
     }
-    100%{
-        opacity:1;
-        transform:translateY(0px);
+    .stats{
+        justify-content: flex-start;
     }
+}
+
+@keyframes move{
+     0%{
+         top:0%;
+     }
+     100%{
+         top:30%;
+     }
 }
