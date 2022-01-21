@@ -4,8 +4,10 @@ const canvas = document.getElementById('canvas');
 const ctx= canvas.getContext('2d')
 let jumpLevelr= document.querySelector('.jump__level span')
 let scoreBar = document.querySelector('.points span')
-jumpLevelr.textContent=13;
+let level = document.querySelector('.level span')
 
+jumpLevelr.textContent=13;
+level.textContent=1;
 
 canvas.width=600;
 canvas.height=550;
@@ -80,6 +82,9 @@ function animate(){
             canScore=false;
             score ++;
             scoreBar.textContent=score;
+            if(score===10){
+               level.textContent=2;
+            }
         }
        //Delete Block That has left the scrreen
        if((obstacle.x + obstacle.size)<=0){
@@ -130,15 +135,38 @@ function increaseEnemySpeed(){
 function generateBlocks(){ // this generates some time for the blocks to appear
 
     let timeDelay  = randomNumberGap(presentTime); // 1000 secnds get a different range of times
-
+    let randomSize=getSize();
     //pushing the object to the array 
-    obstacles.push(new Block(canvas,50,enemySpeed)) // 
+    obstacles.push(new Block(canvas,50,enemySpeed,randomSize.startY,randomSize.double)) // 
      
     // each time some blocks get geneated
     setTimeout(generateBlocks,timeDelay); // this method will be called after the random ranges of times
 }
 
-
+//-50 and 0 for the heights
+// 0 and 1
+function getSize(){
+    const type={}
+    if(score>=10){
+        if(Math.random()>0.5){
+            type.startY=-50;
+            type.double=2
+            return type;
+        }
+        else{
+            // return 0;
+            type.startY=0;
+            type.double=1;
+            return type;
+        }
+    }
+    else{
+        type.startY=0;
+        type.double=1;
+        return type;
+    }
+    
+}
 
 function collide(player,block){
 
@@ -203,13 +231,23 @@ addEventListener('keydown',e=>{
 addEventListener('keyup',(e)=>{
     if(e.code==='ArrowUp'){
         if(!box.increase){
-            box.jumpHeight++;
-            jumpLevelr.textContent=box.jumpHeight++;
-            if(box.jumpHeight>=18){
-                box.jumpHeight=12;
+            box.jumpHeight=19;
+            jumpLevelr.textContent=box.jumpHeight;
+            // if(box.jumpHeight>=18){
+            //     box.jumpHeight=12;
                 
                 
-            }
+            // }
+        }
+    }
+})
+
+addEventListener('keyup',(e)=>{
+    if(e.code==='ArrowDown'){
+        if(!box.increase){
+            box.jumpHeight=12;
+            jumpLevelr.textContent=box.jumpHeight;
+  
         }
     }
 })

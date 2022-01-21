@@ -63,19 +63,25 @@ class Box{
 
 
  class Block{
-    constructor(canvas,size,speed){ 
+    constructor(canvas,size,speed,xx,lg){ 
              this.x = canvas.width + size;
-             this.y = 400 - size;
+             this.y = 400 -(size-xx);
              this.size= size;
+             this.sizeY=size*lg;
              this.color='red';
              this.slideSpeed =speed;
              this.ctx=ctx;
  
     }
+    
+    // randomSize(){
+    //    return 50;
+    // }
     draw(){
         let ctx=this.ctx;
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x,this.y,this.size,this.size*2); // where shoud they come from in this canvas
+        // let y = this.y - this.randomSize();
+        ctx.fillRect(this.x,this.y,this.size,this.sizeY); // where shoud they come from in this canvas
     }
     slide(){
         this.draw();
