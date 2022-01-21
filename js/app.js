@@ -10,6 +10,12 @@ let jumpLevelr= document.querySelector('.jump__level span')
 let scoreBar = document.querySelector('.points span')
 let level = document.querySelector('.level span')
 
+// audio effects
+const audioJump = document.querySelector('#audio-jump');
+const audioLoose = document.querySelector('#audio-loose');
+const audioLevel = document.querySelector('#audio-level');
+
+
 
 jumpLevelr.textContent='18';
 scoreBar.textContent=' 0'
@@ -77,8 +83,8 @@ function startGame(){
 
 
 function animate(){
-    document.querySelector('.game__start').style.display='none';
-    document.querySelector('.stats').style.display='flex';
+ document.querySelector('.game__start').style.display='none';
+ document.querySelector('.stats').style.display='flex';
   canvas.style.display='block';  
   animationId= requestAnimationFrame(animate);
    ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -92,20 +98,17 @@ function animate(){
              console.log('collide');
              gameOver.style.display='flex';
              finalScore.textContent=score;
-
+             audioLoose.play();
+            
         }
         if(isPastBlock(box,obstacle) && canScore){
             canScore=false;
+            audioJump.play();
             score ++;
             scoreBar.textContent=score;
             if(score===10){
                level.textContent=2;
-               if(!box.increase){
-               
-               
-                jumpLevelr.textContent='High';
-    
-             }
+               audioLevel.play();
             }
         }
        //Delete Block That has left the scrreen
@@ -247,6 +250,7 @@ addEventListener('keydown',e=>{
               box.jumpCounter=0;
               box.shouldJump=true;
               canScore=true;
+            
           }
       }
 })
