@@ -4,7 +4,7 @@ class Box{
         this.y=y;
         this.size=size; 
         this.color=color;
-        this.jumpHeight=12;
+        this.jumpHeight=18;
  
         // this 3 are used for jump configuarations
         this.shouldJump= false;

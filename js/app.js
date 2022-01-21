@@ -3,11 +3,15 @@
 const canvas = document.getElementById('canvas');
 const ctx= canvas.getContext('2d')
 const gameOver = document.querySelector('.game__over')
+const finalScore = document.querySelector('.final__score span')
+const restartBtn = document.querySelector('#restart');
+const startBtn = document.querySelector('#start')
 let jumpLevelr= document.querySelector('.jump__level span')
 let scoreBar = document.querySelector('.points span')
 let level = document.querySelector('.level span')
 
-jumpLevelr.textContent=' Medium';
+
+jumpLevelr.textContent='18';
 scoreBar.textContent=' 0'
 level.textContent=1;
 
@@ -38,12 +42,15 @@ function drawBackgroundLine(){
    ctx.stroke();
 }
 
-function restart(button){
-    card.style.display='none';
-    button.blur();
+function restart(){
+    gameOver.style.display='none';
+    restartBtn.blur();
     startGame();
     requestAnimationFrame(animate);
-    console.log('btn  clicked');
+    scoreBar.textContent=0;
+    level.textContent='1'
+    score=0;
+    
     
 }
 
@@ -55,7 +62,9 @@ let obstacles=[]; // empty array to store the objects
 
 
 let box = new Box(ctx,150,350,50,'blue');
-animate();
+
+startBtn.addEventListener('click',animate);
+
 function startGame(){
    box= new Box(ctx,150,350,50,'blue');
    obstacles=[];
@@ -68,6 +77,9 @@ function startGame(){
 
 
 function animate(){
+    document.querySelector('.game__start').style.display='none';
+    document.querySelector('.stats').style.display='flex';
+  canvas.style.display='block';  
   animationId= requestAnimationFrame(animate);
    ctx.clearRect(0,0,canvas.width,canvas.height);
    drawBackgroundLine();
@@ -79,6 +91,7 @@ function animate(){
              cancelAnimationFrame(animationId)
              console.log('collide');
              gameOver.style.display='flex';
+             finalScore.textContent=score;
 
         }
         if(isPastBlock(box,obstacle) && canScore){
@@ -91,11 +104,7 @@ function animate(){
                
                
                 jumpLevelr.textContent='High';
-                // if(box.jumpHeight>=18){
-                //     box.jumpHeight=12;
-                    
-                    
-                // }
+    
              }
             }
         }
@@ -242,26 +251,4 @@ addEventListener('keydown',e=>{
       }
 })
 
-addEventListener('keyup',(e)=>{
-    if(e.code==='ArrowUp'){
-        if(!box.increase){
-            box.jumpHeight=19;
-            jumpLevelr.textContent='High';
-            // if(box.jumpHeight>=18){
-            //     box.jumpHeight=12;
-                
-                
-            // }
-        }
-    }
-})
-
-addEventListener('keyup',(e)=>{
-    if(e.code==='ArrowDown'){
-        if(!box.increase){
-            box.jumpHeight=12;
-            jumpLevelr.textContent='Low';
-  
-        }
-    }
-})
+restartBtn.addEventListener('click',restart);

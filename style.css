@@ -11,7 +11,7 @@ body{
     /* align-items:center; */
     overflow: hidden;
     font-family:sans-serif;
-    background-image:url('https://wallpapersprinted.com/download/2/3d_cubes_black-wallpaper-2560x1600.jpg');
+    background-image:url('https://wallpapermemory.com/uploads/234/squares-wallpaper-hd-1920x1200-365929.jpg');
     background-size:cover;
     background-blend-mode:multiply;
 }
@@ -40,6 +40,7 @@ body{
     margin-bottom:1em;
     flex-wrap:wrap;
     align-items:center;
+    display:none;
     
 }
 #canvas{
@@ -54,8 +55,22 @@ body{
     margin-left:25%;
     margin-right:25%;
     /* opacity:0.3; */
+    display:none;
  
 
+}
+
+.game__start{
+    margin:5em auto;
+    padding:1em;
+    background:#ccc;
+    max-width:450px;
+
+}
+.instructions{
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:1em;
 }
 
 .game__over{
@@ -67,10 +82,8 @@ body{
     padding:1em;
     max-width:400px;
     width:90%;
-    display:flex;
     flex-direction:column;
     border-radius:0.2em;
-    outline:2px solid #222;
     display:none;
     animation: move 500ms ease-in;
 }
@@ -85,13 +98,20 @@ body{
     border:0;
     outline:0;
     background:#01ef;
-    font-size:1.5rem;
+
     font-size:clamp(1rem,2.5vw,1.5rem);
     border-radius:0.2em;
    align-self: center;
    cursor: pointer;
    color:#fff;
 
+}
+
+.start{
+    display:block;
+    margin: 0 auto !important;
+    font-size:clamp(1.5rem,2.5vw,2rem);
+    background:green;
 }
 
 @media (max-width:1000px){

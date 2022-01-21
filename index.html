@@ -10,19 +10,23 @@
 <body>
 
     <div class="container">
-        <h1 class="title">Press Space to Jump </h1>
+        <h1 class="title">2D Cube Game</h1>
         <div class="stats">
             <h3 class="jump__level">Jump Speed:<span> </span></h3>
-            <h3 class="points">Point: <span> </span></h3>
+            <h3 class="points">Points: <span> </span></h3>
             <h3 class="level">Level:<span> </span></h3>
            
         </div>
         <canvas  id="canvas">
       
         </canvas>
+        <div class="game__start">
+            <p class="instructions">Press Space Button to Jump</p>
+            <button id="start" class="btn start">Start</button>
+        </div>
     </div>
     <div class="game__over">
-        <p class="final__score">Your Score is 0</p>
+        <p class="final__score">Your Score is <span>0</span></p>
         <button id="restart" class="btn">Restart</button>
     </div>
     
