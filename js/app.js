@@ -99,6 +99,7 @@ function animate(){
              gameOver.style.display='flex';
              finalScore.textContent=score;
              audioLoose.play();
+             canvas.style.display='none'
             
         }
         if(isPastBlock(box,obstacle) && canScore){

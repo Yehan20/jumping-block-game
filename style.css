@@ -11,7 +11,7 @@ body{
     /* align-items:center; */
     overflow: hidden;
     font-family:sans-serif;
-    background-image:url('https://wallpapermemory.com/uploads/234/squares-wallpaper-hd-1920x1200-365929.jpg');
+    background-image:url('bg-img.jpg');
     background-size:cover;
     background-blend-mode:multiply;
 }
@@ -85,7 +85,6 @@ body{
     flex-direction:column;
     border-radius:0.2em;
     display:none;
-    animation: move 500ms ease-in;
 }
 .final__score{
     font-size:clamp(1rem,2.5vw,2rem);
@@ -123,11 +122,3 @@ body{
     }
 }
 
-@keyframes move{
-     0%{
-         top:0%;
-     }
-     100%{
-         top:30%;
-     }
-}
