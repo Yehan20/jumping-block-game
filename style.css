@@ -25,6 +25,13 @@ body{
 
 }
 
+.split{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+
 .title{
     text-align:center;
     color:#fff;
@@ -45,11 +52,11 @@ body{
 }
 #canvas{
     border-radius:5px;
-    background-color:wheat;
+    background-color:#ccc;
     max-width:600px;
    
     padding:1em;
-    box-shadow: 0 0  3px 5px brown;
+    box-shadow: 0 0  3px 5px #222;
     /* width:100%; */
     width: 100%;
     margin-left:25%;
@@ -104,6 +111,13 @@ body{
    cursor: pointer;
    color:#fff;
 
+}
+
+.off{
+    /* margin: 0 auto; */
+    font-size:0.8rem;
+    align-self:flex-start;
+    margin-top:.4em;
 }
 
 .start{

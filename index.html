@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>2D Cube Game</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <audio id="audio-jump">
+    <audio  id="audio-jump">
         <source src='audio/jump.mp3' type="audio/mp3">
      </audio>
+
      <audio id="audio-loose">
          <source src='audio/collide.mp3' type="audio/mp3">
       </audio>
       <audio id="audio-level">
-        <source src='audio/level.mp3' type="audio/mp3">
+        <source src='audio/level.mp3'  type="audio/mp3">
      </audio>
 
 
     <div class="container">
-        <h1 class="title">2D Cube Game</h1>
+        <div class="split">
+         <h1 class="title">2D Cube Game</h1>
+         <button class="btn off" id="off">Sound Off</button>
+        </div>
         <div class="stats">
             <h3 class="jump__level">Jump Speed:<span> </span></h3>
             <h3 class="points">Points: <span> </span></h3>
@@ -32,7 +37,7 @@
       
         </canvas>
         <div class="game__start">
-            <p class="instructions">Press Space Button to Jump</p>
+            <p class="instructions">Press Space Button to Jump Over The Cubes</p>
             <button id="start" class="btn start">Start</button>
         </div>
     </div>

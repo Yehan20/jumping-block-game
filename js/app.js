@@ -3,12 +3,16 @@
 const canvas = document.getElementById('canvas');
 const ctx= canvas.getContext('2d')
 const gameOver = document.querySelector('.game__over')
-const finalScore = document.querySelector('.final__score span')
-const restartBtn = document.querySelector('#restart');
-const startBtn = document.querySelector('#start')
+
 let jumpLevelr= document.querySelector('.jump__level span')
 let scoreBar = document.querySelector('.points span')
 let level = document.querySelector('.level span')
+
+//buttons
+const finalScore = document.querySelector('.final__score span')
+const restartBtn = document.querySelector('#restart');
+const startBtn = document.querySelector('#start')
+const mutleBtn = document.querySelector('#off');
 
 // audio effects
 const audioJump = document.querySelector('#audio-jump');
@@ -93,13 +97,16 @@ function animate(){
    increaseEnemySpeed();
    obstacles.forEach((obstacle,index)=>{
        obstacle.slide(); // this are objects qand then we can acces this slide method eachj time
-        if(collide(box,obstacle)){ // its true
+        if(collide(box,obstacle)){ // its true game lost
              cancelAnimationFrame(animationId)
              console.log('collide');
-             gameOver.style.display='flex';
-             finalScore.textContent=score;
              audioLoose.play();
-             canvas.style.display='none'
+             setTimeout(()=>{
+                gameOver.style.display='flex';
+                finalScore.textContent=score;
+                canvas.style.display='none'
+             },1000)
+          
             
         }
         if(isPastBlock(box,obstacle) && canScore){
@@ -257,3 +264,26 @@ addEventListener('keydown',e=>{
 })
 
 restartBtn.addEventListener('click',restart);
+
+mutleBtn.addEventListener('click',()=>{
+    let audio = document.querySelectorAll('audio');
+
+    if(!mutleBtn.classList.contains('off-now')){
+        mutleBtn.classList.add('off-now')
+        audio.forEach(aud=>{
+            aud.pause();
+            aud.muted=true
+            mutleBtn.textContent='Sound On';
+            
+        })
+    }
+    else{
+        mutleBtn.classList.remove('off-now')
+        audio.forEach(aud=>{
+            aud.muted=false;
+            mutleBtn.textContent='Sound Off';
+        })
+    }
+      
+
+})
