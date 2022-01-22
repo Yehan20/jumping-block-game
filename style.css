@@ -8,7 +8,6 @@ body{
     background-color:burlywood;
     display:flex;
     flex-direction:column;
-    /* align-items:center; */
     overflow: hidden;
     font-family:sans-serif;
     background-image:url('images/bg-img.jpg');

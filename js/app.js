@@ -93,6 +93,7 @@ function startGame(){
    enemySpeed=5;
    canScore=true;
    presentTime = 1000
+   canvas.style.background='#ccc'
    
 }
 
@@ -132,6 +133,7 @@ canvas.style.display='block';
             if(score===10){
                level.textContent=2;
                audioLevel.play();
+               canvas.style.background='wheat'
             }
         }
 
