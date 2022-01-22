@@ -11,7 +11,7 @@ body{
     /* align-items:center; */
     overflow: hidden;
     font-family:sans-serif;
-    background-image:url('bg-img.jpg');
+    background-image:url('images/bg-img.jpg');
     background-size:cover;
     background-blend-mode:multiply;
 }
