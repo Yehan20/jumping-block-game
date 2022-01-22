@@ -42,7 +42,7 @@ canvas.height=550;
 
 
 //game default variables
-let presentTime = 1000;
+let presentTime = 2000;
 let enemySpeed=5;
 let animationId=null;
 // sound effects
@@ -157,12 +157,12 @@ function getRandom(min,max){
 function randomNumberGap(timeInterval){
    let returnTime = timeInterval;
    if(Math.random()<0.5){
-       returnTime += getRandom(presentTime / 3 , presentTime * 1.5);
+       returnTime += getRandom(presentTime / 3 , presentTime * 2);
 
       
    }
    else{
-       returnTime -= getRandom(presentTime / 3 , presentTime /2);
+       returnTime -= getRandom(presentTime / 3 , presentTime /3);
    }
    return  returnTime;
 }
