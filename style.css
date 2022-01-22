@@ -45,9 +45,11 @@ body{
     justify-content:center;
     gap:30px;
     margin-bottom:1em;
+    margin-top:1em;
     flex-wrap:wrap;
     align-items:center;
-    display:none;
+    
+    
     
 }
 #canvas{
@@ -78,11 +80,12 @@ body{
     text-align:center;
     font-size:2rem;
     margin-bottom:1em;
+    line-height:1.7;
 }
 
 .game__over{
     position:absolute;
-    top:30%;
+    top:10%;
     left:50%;
     transform:translate(-50%,50%);
     background:#ccc;
@@ -134,5 +137,11 @@ body{
     .stats{
         justify-content: flex-start;
     }
+}
+
+@media (max-width:600px) {
+      .stats{
+          justify-content:space-around;
+      }
 }
 

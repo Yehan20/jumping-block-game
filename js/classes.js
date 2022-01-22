@@ -8,7 +8,7 @@ class Box{
  
         // this 3 are used for jump configuarations
         this.shouldJump= false;
-        this.jumpCounter=0
+        this.jumpDistance=0
         this.ctx=ctx;
         this.souldIncrease=false;
  
@@ -17,42 +17,41 @@ class Box{
 
      jump(){
          if(this.shouldJump){
-             this.jumpCounter++;
-              if(this.jumpCounter<15){
+             this.jumpDistance++;
+              if(this.jumpDistance<15){
                   // go up
                   this.y-=this.jumpHeight;
                   console.log('one jump');
-                  console.log('max ',this.y);
+                
  
               }
  
-              else if(this.jumpCounter > 14 && this.jumpCounter< 19){
-                  this.y +=0;
-                  console.log('float',this.y);
-                  //float
+              else if(this.jumpDistance > 14 && this.jumpDistance< 19){ 
+                  this.y +=0; // will be stationairy 
+                 
+                
               }
  
-              else if(this.jumpCounter < 33){
+              else if(this.jumpDistance < 33){
                   ///come down 
                   this.y += this.jumpHeight;
-                  console.log('decelerate',this.y);
+              
               }
            
-           
- 
-              // end the circle
- 
-              if(this.jumpCounter >=32){
+
+              // end the jump
+              if(this.jumpDistance >=32){
                   this.shouldJump=false;
-                  this.spin=0; 
-                  console.log('final',this.y);
               }
+              
          }
      }
+
+
     //draw method
-    draw(){
+
+    draw(){ // becuase the canavas is painting each time we need to change the postion 
         this.jump();
-        console.log('function called');
         let ctx=this.ctx;
         ctx.fillStyle=this.color;
         ctx.fillRect(this.x,this.y,this.size,this.size);
@@ -74,17 +73,15 @@ class Box{
  
     }
     
-    // randomSize(){
-    //    return 50;
-    // }
+
     draw(){
         let ctx=this.ctx;
         ctx.fillStyle = this.color;
-        // let y = this.y - this.randomSize();
         ctx.fillRect(this.x,this.y,this.size,this.sizeY); // where shoud they come from in this canvas
     }
+
     slide(){
-        this.draw();
+        this.draw(); // catch new position
         this.x-=this.slideSpeed;
     }
  }
