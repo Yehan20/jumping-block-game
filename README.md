@@ -16,6 +16,6 @@ You should Jump over the blocks ,you would get a point after a successfull jump 
 
 
 <hr>
-<img style="width:100%;" src="images/gif.gif">
+<img style="width:50%;" src="images/gif.gif">
 Press space or click the canvas to jump the block, 
 
