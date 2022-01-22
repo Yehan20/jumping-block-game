@@ -1,4 +1,7 @@
-Square Block Game  <a href="https://square-block-game.netlify.app/">Live Site</a>
+Square Block Game  
+
+<a href="https://square-block-game.netlify.app/">Live Site</a>
+
 <hr>
 
 This is Simple 2D game made using Canvas Api and HTML , CSS and js
